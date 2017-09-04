@@ -12,8 +12,9 @@ var correctCount = 0;
 var incorrectCount = 0;
 //var for current question count
 var currentQuestion = 0;
+var wrongAnswer;
 var questions = function() {
-  $('#question').html(questionData.question[currentQuestion]);
+  $('#question').html('<h2 class="questionText">' + questionData.question[currentQuestion] + '<h2>');
 };
 var answers = function() {
   for (var i=0; i < questionData.answer[currentQuestion].length; i++) {
@@ -21,7 +22,7 @@ var answers = function() {
   }
 };
 var intervalId;
-var timePerQuestion = 5;
+var timePerQuestion = 10;
 var remainingTime = $('#timeRemaining').html(displayTime);
 
 console.log(questionData.question.length);
@@ -35,31 +36,53 @@ function initGame() {
 }
 
 function nextQuestion() {
-  $('#answers').empty();
-  timePerQuestion = 5;
+  $('#answerScreen').empty();
+  timePerQuestion = 10;
   currentQuestion++;
   if (currentQuestion == questionData.question.length) {
     evalGame();
   } else {
-    return timeOutQuestion(), questions(), answers();
+    return displayTime(), count(), timeOutQuestion(), questions(), answers();
   }
+}
+
+function answerRight() {
+  clearInterval(intervalId);
+  $('#timeRemaining, #question, #answers').empty();
+  $('#answerScreen').html('<div><p>Yes! ' + questionData.correctAns[currentQuestion] + ' is the correct answer! Great job!</p></div>');
+  setTimeout(nextQuestion, 5000);
+}
+
+function answerWrong() {
+  clearInterval(intervalId);
+  $('#timeRemaining, #question, #answers').empty();
+  $('#answerScreen').html('<div><p>Nope '+ wrongAnswer + ' is not the correct answer!</p><p>The correct answer was ' + questionData.correctAns[currentQuestion] + '.</p></div>');
+  setTimeout(nextQuestion, 5000);
+}
+
+function timeRanOut() {
+  clearInterval(intervalId);
+  $('#timeRemaining, #question, #answers').empty();
+  $('#answerScreen').html("<div><p>Oh. Time's up!<p>The correct answer was " + questionData.correctAns[currentQuestion] + '.</p></div>');
+  setTimeout(nextQuestion, 5000);
 }
 
 //evaluation functions=========================================================
 function evalAnswer() {
     if ($(this).html() == questionData.correctAns[currentQuestion]) {
       correctCount++;
-      nextQuestion();
+      answerRight();
     } else {
       incorrectCount++;
-      nextQuestion();
+      wrongAnswer = $(this).html();
+      answerWrong();
     }
 }
 
 function evalGame() {
   clearInterval(intervalId);
   $('#timeRemaining, #question, #answers').empty();
-  $('#gameOver').html('<div> You answered ' + correctCount + ' questions correctly!</div><div>You answered ' + incorrectCount + ' questions incorrectly!</div>');
+  $('#gameOver').html('<div><p class="endScreenText">You answered ' + correctCount + ' questions correctly!</p></div><div><p class="endScreenText">You answered ' + incorrectCount + ' questions incorrectly!</p></div>');
 }
 
 //Timing functions=============================================================
@@ -68,12 +91,12 @@ function count(){
 }
 
 function timeOutQuestion() {
-  setTimeout(nextQuestion, (timePerQuestion * 1000));
+  setTimeout(timeRanOut, (timePerQuestion * 1000));
 }
 
 function displayTime() {
   timePerQuestion--;
-  $('#timeRemaining').html(timePerQuestion);
+  $('#timeRemaining').html('<h3>' + timePerQuestion + '</h3>');
 }
 
 //Game Logic
