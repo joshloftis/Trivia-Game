@@ -21,22 +21,23 @@ var answers = function() {
   }
 };
 var intervalId;
-var timePerQuestion = 30;
+var timePerQuestion = 5;
 var remainingTime = $('#timeRemaining').html(displayTime);
 
 console.log(questionData.question.length);
 
 //Functions
 //=============================================================================
+//changing on screen content functions=========================================
 function initGame() {
   currentQuestion = 0;
-  return timeOutQuestion(), questions(), answers();
+  return count(), timeOutQuestion(), questions(), answers();
 }
 
 function nextQuestion() {
   $('#answers').empty();
+  timePerQuestion = 5;
   currentQuestion++;
-  console.log(currentQuestion);
   if (currentQuestion == questionData.question.length) {
     evalGame();
   } else {
@@ -44,6 +45,7 @@ function nextQuestion() {
   }
 }
 
+//evaluation functions=========================================================
 function evalAnswer() {
     if ($(this).html() == questionData.correctAns[currentQuestion]) {
       correctCount++;
@@ -55,12 +57,18 @@ function evalAnswer() {
 }
 
 function evalGame() {
-  $('#question, #answers').empty();
+  clearInterval(intervalId);
+  $('#timeRemaining, #question, #answers').empty();
   $('#gameOver').html('<div> You answered ' + correctCount + ' questions correctly!</div><div>You answered ' + incorrectCount + ' questions incorrectly!</div>');
 }
 
+//Timing functions=============================================================
+function count(){
+  intervalId = setInterval(displayTime, 1000);
+}
+
 function timeOutQuestion() {
-  setTimeout(nextQuestion, 30000);
+  setTimeout(nextQuestion, (timePerQuestion * 1000));
 }
 
 function displayTime() {
