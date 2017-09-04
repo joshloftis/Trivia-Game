@@ -20,6 +20,9 @@ var answers = function() {
     $('#answers').append('<li class="anAnswer">' + questionData.answer[currentQuestion][i] + '</li>');
   }
 };
+var intervalId;
+var timePerQuestion = 30;
+var remainingTime = $('#timeRemaining').html(displayTime);
 
 console.log(questionData.question.length);
 
@@ -27,7 +30,7 @@ console.log(questionData.question.length);
 //=============================================================================
 function initGame() {
   currentQuestion = 0;
-  return questions(), answers();
+  return timeOutQuestion(), questions(), answers();
 }
 
 function nextQuestion() {
@@ -37,7 +40,7 @@ function nextQuestion() {
   if (currentQuestion == questionData.question.length) {
     evalGame();
   } else {
-    return questions(), answers();
+    return timeOutQuestion(), questions(), answers();
   }
 }
 
@@ -54,6 +57,15 @@ function evalAnswer() {
 function evalGame() {
   $('#question, #answers').empty();
   $('#gameOver').html('<div> You answered ' + correctCount + ' questions correctly!</div><div>You answered ' + incorrectCount + ' questions incorrectly!</div>');
+}
+
+function timeOutQuestion() {
+  setTimeout(nextQuestion, 30000);
+}
+
+function displayTime() {
+  timePerQuestion--;
+  $('#timeRemaining').html(timePerQuestion);
 }
 
 //Game Logic
