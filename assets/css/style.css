@@ -1,19 +1,25 @@
 body {
   height: 100%;
-  background: url('../images/page-background-grid.png');
+  background: url('../images/page-background-grid.jpg');
   background-repeat: no-repeat;
+  background-size: 100%;
   color: #ffffff;
 }
+@font-face {
+  font-family: HarryP;
+  src: url(../font/harrypotter.ttf);
+}
 h1 {
-  font-family: "Henny Penny", cursive;
-  color: #ffffff;
+  font-family: HarryP, cursive;
+  color: #FFD700;
   margin: 30px 0;
-  font-size: 50px;
+  font-size: 90px;
 }
 .allContent {
   background:rgba(255,255,255,0.4);
   border-radius: 3px;
   padding: 40px;
+  min-height: 400px;
 }
 .anAnswer {
   cursor: pointer;
