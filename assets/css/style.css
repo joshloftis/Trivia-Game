@@ -11,24 +11,26 @@ body {
 }
 h1 {
   font-family: HarryP, cursive;
-  color: #FFD700;
+  color: #eeba30;
   margin: 30px 0;
   font-size: 90px;
 }
 .allContent {
-  background:rgba(255,255,255,0.4);
+  background:rgba(116,0,1,0.3);
   border-radius: 3px;
   padding: 40px;
   min-height: 400px;
 }
 .anAnswer {
+  margin: 0 auto;
   cursor: pointer;
   list-style: none;
-  padding-left: 10px;
+  padding: 10px 10px;
+  max-width: 200px;
 }
 .anAnswer:hover {
-  background: #00ff00;
-  border: 1px solid #000000;
-  color:white;
-  border-radius: 5px;
+  background: #d3a625;
+  border: 1px solid #ae0001;
+  color:black;
+  border-radius: 2px;
 }
