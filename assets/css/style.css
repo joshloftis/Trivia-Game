@@ -15,11 +15,54 @@ h1 {
   margin: 30px 0;
   font-size: 90px;
 }
+h3 {
+  font-family: HarryP, cursive;
+}
+.startGame {
+  margin-top: 120px;
+  background: #eeba30;
+  border: 2px solid rgb(116,0,1);
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 20px;
+  color:rgb(116,0,1);
+}
+.startGame:hover {
+  background: rgb(116,0,1);
+  border: 2px solid #eeba30;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 20px;
+  color:#eeba30;
+}
+.restartGame {
+  margin-top: 60px;
+  background: #eeba30;
+  border: 2px solid rgb(116,0,1);
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 20px;
+  color:rgb(116,0,1);
+}
+.restartGame:hover {
+  background: rgb(116,0,1);
+  border: 2px solid #eeba30;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 20px;
+  color:#eeba30;
+}
+.questionText {
+  font-family: HarryP, cursive;
+  color: #eeba30;
+  font-size: 50px;
+}
 .allContent {
   background:rgba(116,0,1,0.3);
   border-radius: 3px;
   padding: 40px;
   min-height: 400px;
+  border: 2px solid #eeba30;
 }
 .anAnswer {
   margin: 0 auto;
@@ -29,8 +72,13 @@ h1 {
   max-width: 200px;
 }
 .anAnswer:hover {
-  background: #d3a625;
+  background: rgba(238, 186, 48, 0.7);
   border: 1px solid #ae0001;
   color:black;
-  border-radius: 2px;
+  border-radius: 3px;
+}
+.message {
+  margin-top: 50px;
+  font-family: HarryP, cursive;
+  font-size: 40px;
 }
